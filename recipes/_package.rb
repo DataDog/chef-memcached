@@ -60,8 +60,9 @@ user service_user do
 end
 
 # create the log directory
-directory node['memcached']['logfilepath'] do
+directory '/mnt/log/memcached' do
   owner 'memcache'
   group 'memcache'
   mode '0755'
+  action :create
 end
