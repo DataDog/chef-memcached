@@ -58,11 +58,3 @@ user service_user do
   shell '/bin/false'
   action [:create, :lock]
 end
-
-# create the log directory
-directory '/mnt/log/memcached' do
-  owner 'memcache'
-  group 'memcache'
-  mode '0755'
-  action :create
-end

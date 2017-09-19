@@ -17,6 +17,15 @@
 # limitations under the License.
 #
 
+
+# create the log directory
+directory '/mnt/log/memcached' do
+  owner 'memcache'
+  group 'memcache'
+  mode '0755'
+  action :create
+end
+
 # this recipe simply uses the memcached_instance custom resource
 # for additional customization you can use this resource in your own wrapper cookbook
 # this recipe simply uses the memcached_instance custom resource
