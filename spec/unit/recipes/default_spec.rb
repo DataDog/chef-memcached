@@ -67,6 +67,13 @@ describe 'memcached::default' do
       expect(chef_run).to create_group('memcache')
     end
 
+    it 'creates memcache log dir' do
+      expect(chef_run).to create_directory('/mnt/log/memcached').with(
+        user: 'memcache',
+        group: 'mencache',
+      )
+    end
+
     it 'deletes /etc/default/memcached' do
       expect(chef_run).to delete_file('/etc/default/memcached')
     end
