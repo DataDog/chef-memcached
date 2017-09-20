@@ -108,6 +108,9 @@ action_class do
     # cleanup default configs to avoid confusion
     remove_default_memcached_configs
 
+    # setup directory for logging
+    setup_logdir
+
     template "/etc/init/#{memcached_instance_name}.conf" do
       source 'init_upstart.erb'
       variables(

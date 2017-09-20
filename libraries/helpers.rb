@@ -67,6 +67,14 @@ def remove_default_memcached_configs
   end
 end
 
+def setup_logdir
+  directory node['memcached']['logfilepath'] do
+    user new_resource.user
+    group new_resource.user
+    mode '0755'
+  end
+end
+
 def cli_options
   options = "-m #{new_resource.memory} \
 -U #{new_resource.udp_port} \
