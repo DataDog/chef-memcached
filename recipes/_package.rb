@@ -64,9 +64,3 @@ directory node['memcached']['logfilepath'] do
   group service_group
   mode '0755'
 end
-
-directory '/var/run/memcached' do
-  user service_user
-  group service_group
-  mode '0755'
-end
