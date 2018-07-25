@@ -13,7 +13,7 @@ PATH=/sbin:/usr/sbin:/bin:/usr/bin
 DESC="Description of the service"
 NAME=<%= @instance %>
 DAEMON=<%= @binary_path %>
-PIDFILE=/var/run/$NAME.pid
+PIDFILE=/var/run/memcached/$NAME.pid
 DAEMON_ARGS="<%= @cli_options %> -d -P $PIDFILE"
 SCRIPTNAME=/etc/init.d/$NAME
 
