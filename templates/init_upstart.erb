@@ -7,4 +7,6 @@ respawn limit 10 5
 
 limit nofile <%= @ulimit -%> <%= @ulimit -%>
 
+oom score <%= @oom_score_adj %>
+
 exec <%= @binary_path %> <%= @cli_options %> >> <%= @log_file %> 2>&1

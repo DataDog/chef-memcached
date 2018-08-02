@@ -24,6 +24,7 @@ ProtectControlGroups=true
 ProtectKernelTunables=true
 ProtectKernelModules=true
 MemoryDenyWriteExecute=true
+OOMScoreAdjust=<%= @oom_score_adj %>
 
 [Install]
 WantedBy=multi-user.target
