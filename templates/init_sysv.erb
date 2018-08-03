@@ -48,6 +48,7 @@ start () {
         start_daemon -p /var/run/memcached/memcached_<%= @instance %>.pid <%= @binary_path %> -d \
           -P /var/run/memcached/memcached_<%= @instance %>.pid <%= @cli_options %> >> <%= @log_file %> 2>&1
         RETVAL=$?
+        echo <%= @oom_score_adj %> > /proc/self/oom_score_adj
         echo
         [ $RETVAL -eq 0 ] && touch <%= @lock_dir %>/memcached
 }
