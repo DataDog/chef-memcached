@@ -4,7 +4,7 @@ maintainer_email  'cookbooks@chef.io'
 license           'Apache-2.0'
 description       'Installs memcached and includes memcached_instance resource for setting up memcached instances'
 long_description  IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version           '5.1.1'
+version           '5.2.0'
 
 %w(ubuntu debian redhat centos suse opensuse opensuseleap scientific oracle amazon zlinux).each do |os|
   supports os
