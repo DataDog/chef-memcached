@@ -37,7 +37,7 @@ start () {
 
     # ensure that /var/run/memcached actually exists
     if [ ! -d /var/run/memcached ]; then
-      mkdir /var/run/memcached
+        mkdir /var/run/memcached
     fi
 
     # ensure that /var/run/memcached has proper permissions
@@ -45,47 +45,49 @@ start () {
         chown <%= @user %> /var/run/memcached
     fi
 
-        start_daemon -p /var/run/memcached/memcached_<%= @instance %>.pid <%= @binary_path %> -d \
-          -P /var/run/memcached/memcached_<%= @instance %>.pid <%= @cli_options %> >> <%= @log_file %> 2>&1
-        RETVAL=$?
-        echo
-        [ $RETVAL -eq 0 ] && touch <%= @lock_dir %>/memcached
+    echo <%= @oom_score_adj %> > /proc/self/oom_score_adj
+
+    start_daemon -p /var/run/memcached/memcached_<%= @instance %>.pid <%= @binary_path %> -d \
+        -P /var/run/memcached/memcached_<%= @instance %>.pid <%= @cli_options %> >> <%= @log_file %> 2>&1
+    RETVAL=$?
+    echo
+    [ $RETVAL -eq 0 ] && touch <%= @lock_dir %>/memcached
 }
 stop () {
-        echo -n $"Stopping $prog: "
-        killproc -p /var/run/memcached/memcached_<%= @instance %>.pid <%= @binary_path %>
-        RETVAL=$?
-        echo
-        if [ $RETVAL -eq 0 ] ; then
-            rm -f <%= @lock_dir %>/memcached
-            rm -f /var/run/memcached/memcached_<%= @instance %>.pid
-        fi
+    echo -n $"Stopping $prog: "
+    killproc -p /var/run/memcached/memcached_<%= @instance %>.pid <%= @binary_path %>
+    RETVAL=$?
+    echo
+    if [ $RETVAL -eq 0 ] ; then
+        rm -f <%= @lock_dir %>/memcached
+        rm -f /var/run/memcached/memcached_<%= @instance %>.pid
+    fi
 }
 
 restart () {
-        stop
-        start
+    stop
+    start
 }
 
 
 # See how we were called.
 case "$1" in
-  start)
+    start)
         start
         ;;
-  stop)
+    stop)
         stop
         ;;
-  status)
+    status)
         status memcached
         ;;
-  restart|reload|force-reload)
+    restart|reload|force-reload)
         restart
         ;;
-  condrestart)
+    condrestart)
         [ -f <%= @lock_dir %>/memcached ] && restart || :
         ;;
-  *)
+    *)
         echo $"Usage: $0 {start|stop|status|restart|reload|force-reload|condrestart}"
         exit 1
 esac

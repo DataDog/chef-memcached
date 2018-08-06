@@ -119,11 +119,11 @@ action_class do
       source 'init_upstart.erb'
       variables(
         instance: memcached_instance_name,
+        oom_score_adj: new_resource.oom_score_adj,
         ulimit: new_resource.ulimit,
         binary_path: binary_path,
         cli_options: cli_options,
         log_file: log_file_name,
-        oom_score_adj: oom_score_adj,
       )
       cookbook new_resource.template_cookbook
       notifies :restart, "service[#{memcached_instance_name}]", :immediately unless new_resource.no_restart

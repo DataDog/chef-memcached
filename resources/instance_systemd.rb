@@ -108,12 +108,12 @@ action_class do
       source 'init_systemd.erb'
       variables(
         instance: memcached_instance_name,
+        oom_score_adj: new_resource.oom_score_adj,
         private_tmp: new_resource.private_tmp,
         ulimit: new_resource.ulimit,
         user: new_resource.user,
         binary_path: binary_path,
         cli_options: cli_options,
-        oom_score_adj: oom_score_adj,
       )
       cookbook new_resource.template_cookbook
       notifies :run, 'execute[reload_unit_file]', :immediately
