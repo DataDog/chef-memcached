@@ -30,6 +30,7 @@ property :listen, String, default: '0.0.0.0'
 property :maxconn, [Integer, String], default: 1024
 property :user, String, default: lazy { service_user }
 property :binary_path, String
+property :oom_score_adj, Integer, default: 0
 property :threads, [Integer, String]
 property :max_object_size, String, default: '1m'
 property :experimental_options, Array, default: []
@@ -123,7 +124,8 @@ action_class do
         user: new_resource.user,
         binary_path: binary_path,
         cli_options: cli_options,
-        log_file: log_file_name
+        log_file: log_file_name,
+        oom_score_adj: oom_score_adj,
       )
       notifies :restart, "service[#{memcached_instance_name}]", :immediately unless new_resource.no_restart
     end

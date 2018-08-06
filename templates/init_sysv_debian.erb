@@ -38,6 +38,7 @@ do_start()
   touch $PIDFILE
   chown <%= @user %>:root $PIDFILE
   chmod 660 $PIDFILE
+  echo <%= @oom_score_adj %> > /proc/self/oom_score_adj
   start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON --test > /dev/null \
     || return 1
   start-stop-daemon --start --quiet --pidfile $PIDFILE --exec $DAEMON -- \
