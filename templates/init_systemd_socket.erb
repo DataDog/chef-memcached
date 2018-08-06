@@ -1,0 +1,13 @@
+# Socket unit configuration for <%= @instance %>
+
+[Unit]
+Description=memcached instance <%= @instance %> - unix socket
+
+[Socket]
+ListenStream=<%= @unixsock %>
+SocketUser=<%= @user %>
+SocketMode=0660
+Service=<%= @instance %>.service
+
+[Install]
+WantedBy=sockets.target

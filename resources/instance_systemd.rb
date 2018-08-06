@@ -43,6 +43,7 @@ property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
 property :no_restart, [true, false], default: false
 property :log_level, String, default: 'info'
+property :unixsock, [String, nil], default: nil
 
 action :start do
   create_init
@@ -103,15 +104,33 @@ action_class do
     # cleanup default configs to avoid confusion
     remove_default_memcached_configs
 
+    # Create systemd socket file if needed
+    unless unixsock.nil?
+      template "/etc/systemd/system/#{memcached_instance_name}.socket" do
+        source 'init_systemd_socket.erb'
+        variables(
+          instance: memcached_instance_name,
+          unixsock: new_resource.unixsock,
+          user: new_resource.user,
+        )
+        cookbook new_resource.template_cookbook
+        notifies :run, 'execute[reload_unit_file]', :immediately
+        owner 'root'
+        group 'root'
+        mode '0644'
+      end
+    end
+
     template "/etc/systemd/system/#{memcached_instance_name}.service" do
-      source 'init_systemd.erb'
+      source 'init_systemd_service.erb'
       variables(
         instance: memcached_instance_name,
+        oom_score_adj: new_resource.oom_score_adj,
         ulimit: new_resource.ulimit,
+        unixsock: new_resource.unixsock,
         user: new_resource.user,
         binary_path: binary_path,
         cli_options: cli_options,
-        oom_score_adj: oom_score_adj,
       )
       cookbook new_resource.template_cookbook
       notifies :run, 'execute[reload_unit_file]', :immediately

@@ -3,6 +3,9 @@
 [Unit]
 Description=memcached instance <%= @instance %>
 After=network.target
+<% unless @unixsock.nil? -%>
+After=<%= @instance %>.socket
+<% end -%>
 
 [Service]
 User=<%= @user %>

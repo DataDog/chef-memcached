@@ -72,6 +72,7 @@ Adds or removes an instance of memcached running under the system's native init 
 - :no_restart - disable the service restart on configuration change. default: false
 - :log_level - The level at which we log, default to 'info'. Choose from: 'info', 'debug', 'trace' which map to '-v', '-vv' or '-vvv' arguments.
 - :oom_score_adj - Adjusts the OOM killer's badness score. Ranges from -1000 to 1000.
+- :unixsock - unix socket path to listen on. default: nil
 
 #### Examples
 

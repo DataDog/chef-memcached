@@ -44,6 +44,7 @@ property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
 property :no_restart, [true, false], default: false
 property :log_level, String, default: 'info'
+property :unixsock, [String, nil], default: nil
 
 action :start do
   create_init
