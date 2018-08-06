@@ -104,6 +104,13 @@ action_class do
     # cleanup default configs to avoid confusion
     remove_default_memcached_configs
 
+    # Fix logdir ownership
+    directory node['memcached']['logfilepath'] do
+      user 'syslog'
+      group 'syslog'
+      mode '0755'
+    end
+
     # Create systemd socket file if needed
     unless unixsock.nil?
       template "/etc/systemd/system/#{memcached_instance_name}.socket" do

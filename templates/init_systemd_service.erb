@@ -29,5 +29,9 @@ ProtectKernelModules=true
 MemoryDenyWriteExecute=true
 OOMScoreAdjust=<%= @oom_score_adj %>
 
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=<%= @instance %>
+
 [Install]
 WantedBy=multi-user.target
