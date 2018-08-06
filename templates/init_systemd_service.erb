@@ -4,7 +4,7 @@
 Description=memcached instance <%= @instance %>
 After=network.target
 <% unless @unixsock.nil? -%>
-After=<%= @instance %>.socket
+Requires=<%= @instance %>.socket
 <% end -%>
 
 [Service]
