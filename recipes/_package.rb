@@ -63,4 +63,7 @@ directory node['memcached']['logfilepath'] do
   user service_user
   group service_group
   mode '0755'
+
+  # Hack to prevent ownership change loop once created
+  not_if { ::Dir.exist?(node['memcached']['logfilepath']) }
 end
