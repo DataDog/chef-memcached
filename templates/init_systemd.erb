@@ -12,7 +12,7 @@ Restart=on-failure
 
 # Various security configurations from:
 # https://github.com/memcached/memcached/blob/master/scripts/memcached.service
-PrivateTmp=true
+PrivateTmp=<%= @private_tmp %>
 ProtectSystem=full
 NoNewPrivileges=true
 PrivateDevices=true

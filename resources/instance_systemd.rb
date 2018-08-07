@@ -43,6 +43,7 @@ property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
 property :no_restart, [true, false], default: false
 property :log_level, String, default: 'info'
+property :private_tmp, [true, false], default: true
 
 action :start do
   create_init
@@ -107,6 +108,7 @@ action_class do
       source 'init_systemd.erb'
       variables(
         instance: memcached_instance_name,
+        private_tmp: new_resource.private_tmp,
         ulimit: new_resource.ulimit,
         user: new_resource.user,
         binary_path: binary_path,
