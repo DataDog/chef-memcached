@@ -31,3 +31,4 @@ default['memcached']['experimental_options'] = []
 default['memcached']['extra_cli_options'] = []
 default['memcached']['ulimit'] = 1024
 default['memcached']['logfilepath'] = '/var/log/memcached'
+default['memcached']['unixsock_perms'] = '0660'

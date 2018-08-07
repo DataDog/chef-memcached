@@ -42,6 +42,7 @@ property :remove_default_config, [true, false], default: true
 property :no_restart, [true, false], default: false
 property :log_level, String, default: 'info'
 property :unixsock, [String, nil], default: nil
+property :unixsock_perms, [Integer, String], default: node['memcached']['unixsock_perms']
 
 action :start do
   create_init

@@ -76,7 +76,12 @@ def cli_options
   options << " -#{log_arg}"
 
   options << " -t #{new_resource.threads}" if new_resource.threads
-  options << " -s #{new_resource.unixsock}" unless new_resource.unixsock.nil?
+
+  unless new_resource.unixsock.nil?
+    options << " -s #{new_resource.unixsock}"
+    options << " -a #{new_resource.unixsock_perms}"
+  end
+
   options << " #{new_resource.extra_cli_options.join(' ')}" unless new_resource.extra_cli_options.empty?
   options
 end

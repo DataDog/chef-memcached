@@ -73,6 +73,7 @@ Adds or removes an instance of memcached running under the system's native init 
 - :log_level - The level at which we log, default to 'info'. Choose from: 'info', 'debug', 'trace' which map to '-v', '-vv' or '-vvv' arguments.
 - :oom_score_adj - Adjusts the OOM killer's badness score. Ranges from -1000 to 1000.
 - :unixsock - unix socket path to listen on. default: nil
+- :unixsock_perms - permissions (in octal format) for unix socket. default: '0660'
 
 #### Examples
 

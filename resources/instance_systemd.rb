@@ -44,6 +44,7 @@ property :remove_default_config, [true, false], default: true
 property :no_restart, [true, false], default: false
 property :log_level, String, default: 'info'
 property :unixsock, [String, nil], default: nil
+property :unixsock_perms, [Integer, String], default: node['memcached']['unixsock_perms']
 
 action :start do
   create_init
@@ -118,6 +119,7 @@ action_class do
         variables(
           instance: memcached_instance_name,
           unixsock: new_resource.unixsock,
+          unixsock_perms: new_resource.unixsock_perms,
           user: new_resource.user,
         )
         cookbook new_resource.template_cookbook

@@ -6,7 +6,7 @@ Description=memcached instance <%= @instance %> - unix socket
 [Socket]
 ListenStream=<%= @unixsock %>
 SocketUser=<%= @user %>
-SocketMode=0660
+SocketMode=<%= @unixsock_perms %>
 Service=<%= @instance %>.service
 
 [Install]
