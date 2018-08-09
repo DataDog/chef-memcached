@@ -44,6 +44,7 @@ property :disable_default_instance, [true, false], default: true
 property :remove_default_config, [true, false], default: true
 property :no_restart, [true, false], default: false
 property :log_level, String, default: 'info'
+property :private_tmp, false, default: false # Hack to make this property available for memcached_instance_systemd
 
 action :start do
   create_init
